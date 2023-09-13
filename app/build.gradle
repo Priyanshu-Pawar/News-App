@@ -30,6 +30,15 @@ android {
 
 dependencies {
 
+    //picasso library for images
+    implementation 'com.squareup.picasso:picasso:2.8'
+
+    //retrofit for http request
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+
+    //Gson converter
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'

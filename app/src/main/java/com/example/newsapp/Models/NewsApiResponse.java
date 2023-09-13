@@ -1,8 +1,9 @@
 package com.example.newsapp.Models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class NewsApiResponse {
+public class NewsApiResponse implements Serializable {
     public String status;
     public int totalResults;
     public ArrayList<NewsHeadlines> articles;

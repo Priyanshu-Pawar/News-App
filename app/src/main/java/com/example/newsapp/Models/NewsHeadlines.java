@@ -1,8 +1,9 @@
 package com.example.newsapp.Models;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class NewsHeadlines {
+public class NewsHeadlines implements Serializable {
 
     public Source source = null;
     public String author = "";
@@ -10,7 +11,7 @@ public class NewsHeadlines {
     public String description = "";
     public String url = "";
     public String urlToImage = "";
-    public Date publishedAt;
+    public String publishedAt;
     public String content = "";
 
     public Source getSource() {
@@ -61,11 +62,11 @@ public class NewsHeadlines {
         this.urlToImage = urlToImage;
     }
 
-    public Date getPublishedAt() {
+    public String getPublishedAt() {
         return publishedAt;
     }
 
-    public void setPublishedAt(Date publishedAt) {
+    public void setPublishedAt(String publishedAt) {
         this.publishedAt = publishedAt;
     }
 
