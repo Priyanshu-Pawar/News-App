@@ -2,7 +2,6 @@ package com.example.newsapp;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -15,9 +14,9 @@ import java.util.ArrayList;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomViewHolder> {
 
-    private Context context;
-    private ArrayList<NewsHeadlines> headlines;
-    private SelectListener listener;
+    private final Context context;
+    private final ArrayList<NewsHeadlines> headlines;
+    private final SelectListener listener;
 
     public CustomAdapter(Context context, ArrayList<NewsHeadlines> headlines, SelectListener listener) {
         this.context = context;
@@ -34,19 +33,18 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
 
+
         holder.text_title.setText(headlines.get(position).getTitle());
         holder.text_source.setText(headlines.get(position).getSource().getName());
+        holder.text_publish_date.setText(headlines.get(position).getPublishedAt());
 
         if(headlines.get(position).getUrlToImage() != null){
-            Picasso.get().load(headlines.get(position).getUrlToImage()).into(holder.img_headline);
+            Picasso.get()
+                    .load(headlines.get(position).getUrlToImage())
+                    .into(holder.img_headline);
         }
 
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                listener.OnNewsClicked(headlines.get(position));
-            }
-        });
+        holder.cardView.setOnClickListener(view -> listener.OnNewsClicked(headlines.get(position)));
     }
 
     @Override

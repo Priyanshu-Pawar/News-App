@@ -32,7 +32,7 @@ public class RequestManager {
             call.enqueue(new Callback<NewsApiResponse>() {
                 @Override
                 public void onResponse(@NonNull Call<NewsApiResponse> call, @NonNull Response<NewsApiResponse> response) {
-                    if(response.isSuccessful()){
+                    if(!response.isSuccessful()){
                        Toast.makeText(context, "Error!", Toast.LENGTH_SHORT).show();
                     }
 

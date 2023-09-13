@@ -10,11 +10,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class CustomViewHolder extends RecyclerView.ViewHolder {
 
-    TextView text_title, text_source;
+    TextView text_title, text_source, text_publish_date;
     ImageView img_headline;
     CardView cardView;
     public CustomViewHolder(@NonNull View itemView) {
         super(itemView);
+
+        text_publish_date = itemView.findViewById(R.id.text_publish_date);
 
         text_title = itemView.findViewById(R.id.text_title);
         text_source = itemView.findViewById(R.id.text_source);

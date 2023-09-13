@@ -2,7 +2,10 @@ package com.example.newsapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -37,6 +40,15 @@ public class DetailsActivity extends AppCompatActivity {
 
 
         Picasso.get().load(headlines.getUrlToImage()).into(img_news);
+
+        Button readMoreButton = findViewById(R.id.btn_read_more);
+
+        readMoreButton.setOnClickListener(view -> {
+
+            txt_content.setMaxLines(Integer.MAX_VALUE);
+            startActivity(new Intent(DetailsActivity.this, WebViewActivity.class)
+                    .putExtra("website_url", headlines.getUrl()));
+        });
 
     }
 }

@@ -1,6 +1,7 @@
 package com.example.newsapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,7 +10,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.newsapp.Models.NewsApiResponse;
@@ -22,13 +22,32 @@ public class MainActivity extends AppCompatActivity implements SelectListener, V
     RecyclerView recyclerView;
     CustomAdapter customAdapter;
     ProgressDialog dialog;
-
     Button btn1, btn2, btn3, btn4, btn5, btn6, btn7;
+    SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        searchView = findViewById(R.id.search_view);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                dialog.setTitle("Fetching news articles of " + query);
+                dialog.show();
+                RequestManager manager = new RequestManager(MainActivity.this);
+                manager.getNewsHeadlines(listener, "general", query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
 
         dialog = new ProgressDialog(this);
         dialog.setTitle("Fetching News Articles...");
@@ -62,13 +81,19 @@ public class MainActivity extends AppCompatActivity implements SelectListener, V
     private final OnFetchDataListener<NewsApiResponse> listener = new OnFetchDataListener<NewsApiResponse>() {
         @Override
         public void onFetchData(ArrayList<NewsHeadlines> arrayList, String message) {
-            showNews(arrayList);
-            dialog.dismiss();
+            
+            if(arrayList.isEmpty()){
+                Toast.makeText(MainActivity.this, "No data found!!!", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                showNews(arrayList);
+                dialog.dismiss();
+            }
         }
 
         @Override
         public void onError(String message) {
-            Toast.makeText(MainActivity.this, "Error!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "An Error Occured!!!", Toast.LENGTH_SHORT).show();
         }
     };
 

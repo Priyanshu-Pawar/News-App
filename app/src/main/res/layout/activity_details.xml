@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:context=".DetailsActivity">
 
@@ -14,9 +14,10 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <androidx.cardview.widget.CardView
+                app:cardCornerRadius="8dp"
                 app:cardElevation="8dp"
                 android:layout_margin="8dp"
                 android:layout_width="match_parent"
@@ -36,12 +37,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
 
-                    <ImageView
+                    <com.makeramen.roundedimageview.RoundedImageView
                         android:id="@+id/img_detail_news"
                         android:scaleType="fitXY"
                         android:layout_marginTop="8dp"
                         android:layout_width="match_parent"
                         android:src="@drawable/not_available"
+                        app:riv_corner_radius="8dip"
                         android:layout_height="250dp"/>
 
                     <TextView
@@ -84,8 +86,18 @@
                     android:textSize="20sp"
                     android:textColor="@color/black"
                     android:layout_marginTop="8dp"
+                    android:ellipsize="end"
+                    android:text="Your article text goes here..."
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
+
+                <Button
+                    android:id="@+id/btn_read_more"
+                    android:layout_margin="6dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Read More"
+                />
 
             </LinearLayout>
 
